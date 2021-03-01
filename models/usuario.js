@@ -31,7 +31,8 @@ const UsuarioSchema = Schema({
 });
 
 UsuarioSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
     //Basicamente aca, se sacan los dos primeros parametros, y el resto queda en usuario...
     //Despues se imprime el usuario sin los dos parametros

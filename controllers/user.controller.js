@@ -94,7 +94,6 @@ const usuariosDelete = async(req = request, res = response) => {
 
     res.json({
         msg: 'DELETE API - Desde el controller',
-        id,
         usuario
     });
 }

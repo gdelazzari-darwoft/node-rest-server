@@ -1,3 +1,5 @@
+const Categoria = require('../models/categoria');
+const Producto = require('../models/producto');
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 
@@ -17,17 +19,34 @@ const validarEmail = async(correo = '') => {
 }
 
 const existeUsuario = async(id = '') => {
-    //Validar si el correo existe en la BD
+    //Validar si el ID de usuario existe en la BD
     const existeUsuario = await Usuario.findById(id);
     if (!existeUsuario) {
-        throw new Error('El ID ingresado no existe en la BD');
+        throw new Error('El ID de Usuario ingresado no existe en la BD');
     }
 }
 
+const existeCategoria = async(id = '') => {
+    //Validar si el ID de categoria existe en la BD
+    const existeCategoria = await Categoria.findById(id);
+    if (!existeCategoria) {
+        throw new Error('El ID de Categoria ingresado no existe en la BD');
+    }
+}
+
+const existeProducto = async(id = '') => {
+    //Validar si el ID de categoria existe en la BD
+    const existeProducto = await Producto.findById(id);
+    if (!existeProducto) {
+        throw new Error('El ID del Producto ingresado no existe en la BD');
+    }
+}
 
 
 module.exports = {
     validarRole,
     validarEmail,
-    existeUsuario
+    existeUsuario,
+    existeCategoria,
+    existeProducto
 }

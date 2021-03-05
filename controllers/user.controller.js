@@ -63,8 +63,6 @@ const usuariosPut = async(req = request, res = response) => {
     const { id } = req.params;
     const { _id, password, gooogle, ...resto } = req.body;
 
-    //Validar si existe en la BD
-
     //Si actualizamos el Password, hay que hacer un HASH
     if (password) {
         const salt = bcryptjs.genSaltSync();

@@ -7,8 +7,13 @@ class Server {
         this.app = express()
         this.port = process.env.PORT;
 
-        this.usuariosPath = '/api/usuarios';
-        this.authPath = '/api/auth';
+        this.paths = {
+            auth: '/api/auth',
+            usuarios: '/api/usuarios',
+            categorias: '/api/categorias',
+            productos: '/api/productos',
+            busqueda: '/api/busqueda'
+        }
 
         //Conectar a Base de Datos
         this.conectarDB();
@@ -38,14 +43,22 @@ class Server {
 
     routes() {
         //Configurar routes
+        //Aca se configura cada ruta con su route correspondiente
 
         //Login
-        this.app.use(this.authPath, require('../routes/auth'));
+        this.app.use(this.paths.auth, require('../routes/auth'));
 
         //CRUD de Usuarios
-        this.app.use(this.usuariosPath, require('../routes/user'));
-        //aca lo que hacemos es decir que para la ruta "/api/usuarios" se usa el route configurado en "../routes/user"
+        this.app.use(this.paths.usuarios, require('../routes/user'));
 
+        //CRUD de Categorias
+        this.app.use(this.paths.categorias, require('../routes/categorias'));
+
+        //CRUD de Productos
+        this.app.use(this.paths.productos, require('../routes/productos'));
+
+        //Busquedas
+        this.app.use(this.paths.busqueda, require('../routes/busqueda'))
 
     }
 

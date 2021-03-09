@@ -42,11 +42,20 @@ const existeProducto = async(id = '') => {
     }
 }
 
+//Validar Colecciones Permitidas
+const coleccionesPermitidas = (coleccion = '', coleccionesPermitidas = []) => {
+    const estaIncluida = coleccionesPermitidas.includes(coleccion);
+    if (!estaIncluida) {
+        throw new Error('La URL no es permitida!');
+    }
+    return true;
+}
 
 module.exports = {
     validarRole,
     validarEmail,
     existeUsuario,
     existeCategoria,
-    existeProducto
+    existeProducto,
+    coleccionesPermitidas
 }
